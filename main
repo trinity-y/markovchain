@@ -1,0 +1,31 @@
+import random
+foundwords = []
+wordsDict = {}
+
+with open("text", "r") as file:
+    contents = file.read().replace('\n',' ')
+words = contents.split(' ')
+
+def findwords(word):
+    for g in range(len(words) - 1):
+        if words[g] == word:
+            if not words[g + 1] == '':
+                foundwords.append(words[g + 1])
+    return foundwords
+    
+for i in range(len(words) - 1):
+    findwords(words[i])
+    wordsDict.setdefault(words[i], foundwords)
+    del foundwords[:]
+    
+def nextword(word):
+	wordList = wordsDict[word]
+	new = wordList[random.choice(wordList)]
+	return new
+    
+def assemble():
+	final = [random.choice(words).capitalize()]
+	final.append(nextword(final[-1]))
+	print(final)
+
+assemble()
