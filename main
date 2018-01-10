@@ -10,21 +10,24 @@ def findwords(word):
 		if words[g] == word:
 			if not words[g + 1] == '':
 				foundwords.append(words[g + 1].lower())
+			elif words == ' ':
+				foundwords.append(words[g + 2].lower())
 	return foundwords
-	
-for i in range(len(words) - 1):
-    foundwords = findwords(words[i])
-    wordsDict.setdefault(words[i], foundwords)
-    del foundwords[:]	
-    
+
 def nextword(word):
+	poswords = findwords(word)
+	wordsDict.setdefault(word, poswords)
 	wordList = wordsDict[word]
-	new = wordList[random.choice(wordList)]
+	if not wordList:
+		new = random.choice(words)
+	else:
+		new = random.choice(wordList)
 	return new
     
 def assemble():
 	final = [random.choice(words).capitalize()]
-	final.append(nextword(final[-1]).lower())
-	print(final)
+	for i in range(5):
+		final.append(nextword(final[-1]).lower())
+	print(' '.join(final))
 
 assemble()
