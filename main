@@ -3,20 +3,19 @@ foundwords = []
 wordsDict = {}
 
 with open("text", "r") as file:
-    contents = file.read().replace('\n',' ')
-words = contents.split(' ')
+	words = file.read().replace('\n',' ').split(' ')
 
 def findwords(word):
-    for g in range(len(words) - 1):
-        if words[g] == word:
-            if not words[g + 1] == '':
-                foundwords.append(words[g + 1])
-    return foundwords
-    
+	for g in range(len(words) - 1):
+		if words[g] == word:
+			if not words[g + 1] == '':
+				foundwords.append(words[g + 1].lower())
+	return foundwords
+	
 for i in range(len(words) - 1):
-    findwords(words[i])
+    foundwords = findwords(words[i])
     wordsDict.setdefault(words[i], foundwords)
-    del foundwords[:]
+    del foundwords[:]	
     
 def nextword(word):
 	wordList = wordsDict[word]
@@ -25,7 +24,7 @@ def nextword(word):
     
 def assemble():
 	final = [random.choice(words).capitalize()]
-	final.append(nextword(final[-1]))
+	final.append(nextword(final[-1]).lower())
 	print(final)
 
 assemble()
