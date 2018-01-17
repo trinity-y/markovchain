@@ -1,6 +1,6 @@
 # markovchain
 sample text: The Book Thief, Markus Zusak
 
-python3 markov chain example
+python3 markov chain example -- only requires two files! 
 
-work in progress
+by trinity
